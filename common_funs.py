@@ -1,5 +1,5 @@
 import numpy as np
-from basic_funs import *
+from basic_functions.basic_funs import *
 
 def collect_stats(data, trial_num):    
     if len(data) != trial_num:
