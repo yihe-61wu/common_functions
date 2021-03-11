@@ -50,12 +50,12 @@ def ruin_abit(ternary_states, rate):
     y = np.multiply(x, collapse(p)) # improve by mask
     return y
 
-def binary_entropy(probs):
+def binary_entropy(probs, base = np.e):
     p = np.asarray(probs)
     q = np.zeros_like(p)
     mask = np.logical_and(p > 0, p < 1)
     pm = p[mask]
-    xlogx = lambda x : np.multiply(x, np.log(x))
+    xlogx = lambda x : np.multiply(x, np.log(x) / np.log(base))
     q[mask] = -(xlogx(pm) + xlogx(1 - pm))
     return q
 
