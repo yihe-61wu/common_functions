@@ -44,12 +44,6 @@ def randomise_abit(probs, noise):
     q = p * (1 - 2 * e) + e
     return q
 
-def ruin_abit(ternary_states, rate):
-    x = np.asarray(ternary_states)
-    p = np.full_like(x, 1 - rate, dtype = float)
-    y = np.multiply(x, collapse(p)) # improve by mask
-    return y
-
 def binary_entropy(probs, base = np.e):
     p = np.asarray(probs)
     q = np.zeros_like(p)
