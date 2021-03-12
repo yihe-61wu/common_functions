@@ -32,15 +32,7 @@ def verbose_print(verbose, message):
         print(message)
 
 def randomise_abit(probs, noise):
-    p = np.asarray(probs).astype(float)
-    p[p < 0] = 0
-    p[p > 1] = 1
-    if noise < 0:
-        e = 0
-    elif noise > 1:
-        e = 1
-    else:
-        e = noise
+    p, e = [duoramp(x, 0, 1) for x in [probs, noise]]
     q = p * (1 - 2 * e) + e
     return q
 
