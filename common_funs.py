@@ -58,17 +58,3 @@ def binary_entropy(probs, base = np.e):
     xlogx = lambda x : np.multiply(x, np.log(x) / np.log(base))
     q[mask] = -(xlogx(pm) + xlogx(1 - pm))
     return q
-
-def remove0vectors(data):
-    m = np.asarray(data)
-    return m[~np.all(m == 0, axis = 1)]
-
-def biter(binary):
-    x = np.asarray(binary, dtype = float)
-    y = x * 2 - 1
-    return y
-
-def terbi(ternary):
-    x = np.asarray(ternary, dtype = float)
-    y = (x + 1) / 2
-    return y
