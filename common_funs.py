@@ -1,13 +1,17 @@
 import numpy as np
 from basic_functions.basic_funs import *
 
-def collect_stats(data, trial_num):    
-    if len(data) != trial_num:
+def collect_stats(data, trial_num):
+    data_len = len(data)
+    if data_len != trial_num:
         raise ValueError('Incorrect data structure!')
-    sample_num = trial_num - np.count_nonzero(np.isnan(data), axis = 0)
-    sample_avg = np.nanmean(data, axis = 0)
-    sample_std = np.nanstd(data, axis = 0, ddof = 1)
-    sample_se = np.divide(sample_std, np.sqrt(sample_num))
+    elif data_len == 1:
+        sample_avg = np.asarray(data)
+    else:
+        sample_num = trial_num - np.count_nonzero(np.isnan(data), axis = 0)
+        sample_avg = np.nanmean(data, axis = 0)
+        sample_std = np.nanstd(data, axis = 0, ddof = 1)
+        sample_se = np.divide(sample_std, np.sqrt(sample_num))
     return sample_avg, sample_se
         
 def cointoss(coin_num = 1, trial_num = 1, bias = 0.5):
