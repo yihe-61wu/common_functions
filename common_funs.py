@@ -6,7 +6,8 @@ def collect_stats(data, trial_num):
     if data_len != trial_num:
         raise ValueError('Incorrect data structure!')
     elif data_len == 1:
-        sample_avg = np.asarray(data)
+        sample_avg = np.ravel(data)
+        sample_se = np.zeros_like(sample_avg)
     else:
         sample_num = trial_num - np.count_nonzero(np.isnan(data), axis = 0)
         sample_avg = np.nanmean(data, axis = 0)
