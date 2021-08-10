@@ -49,3 +49,18 @@ def binary_entropy(probs, base = np.e):
     xlogx = lambda x : np.multiply(x, np.log(x) / np.log(base))
     q[mask] = -(xlogx(pm) + xlogx(1 - pm))
     return q
+
+def argsort_randidval(array, axis, epsilon = 0.01, random_generator = None):
+    if random_generator is None:
+        rng = np.random.default_rng()
+    else:
+        rng = random_generator
+    absarr = np.abs(array)
+    posarr = absarr[absarr > 0]
+    if posarr.size > 0:
+        jitter = np.min(absarr[absarr > 0]) * epsilon
+    else:
+        jitter = epsilon
+    noisy_arr = rng.normal(array, jitter)
+    idx = np.argsort(noisy_arr, axis)
+    return idx
